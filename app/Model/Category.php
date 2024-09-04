@@ -11,4 +11,12 @@ class Category extends AppModel {
       'message' => 'This category exists'
     )
       );
+
+  public $hasMany = array(
+    'Post' => array(
+      'className' => 'Post',
+      'foreignKey' => 'category_id',
+      'dependent' => true
+    )
+    );
 }

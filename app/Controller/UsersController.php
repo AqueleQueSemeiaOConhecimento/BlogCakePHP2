@@ -2,7 +2,10 @@
 
 App::uses('AppController', 'Controller');
 
+
 class UsersController extends AppController {
+  public $components = ['Email', 'Flash'];
+
 
   public function beforeFilter()
   {
@@ -39,15 +42,33 @@ class UsersController extends AppController {
   public function add() {
     if ($this->request->is('post')) {
         $this->User->create();
+        $codigoVerificacao = uniqid();
+        $this->request->data['User']['code'] = $codigoVerificacao;
         if ($this->User->save($this->request->data)) {
-            $this->Flash->success(__('The user has been saved'));
-            return $this->redirect(array('action' => 'index'));
+            $emailData = $this->request->data['User'];
+            $this->Email->sendEmail($emailData['email'], 'Bem-vindo Obrigado por se cadastrar!', $codigoVerificacao);
+            return $this->redirect(['controller' => 'posts', 'action' => 'index']);
         }
-        $this->Flash->error(
-            __('The user could not be saved. Please, try again.')
-        );
+        $this->Flash->error(__('The user could not be saved. Please, try again.'));
     }
-}
+  }
+
+  public function status() {
+    if ($this->request->is('post')) {
+      $user = $this->Auth->user();
+
+      $codigoRecebido = $this->request->data['User']['code'];
+      if($user['code'] === $codigoRecebido) {
+        $this->User->id = $user['id'];
+        if($this->User->saveField('status', 1)) {
+          $this->Flash->success(__('User verify with success'));
+          return $this->redirect(['controller' => 'posts', 'action' => 'index']);
+        }
+      }
+      var_dump($this->request->data);
+      return $this->Flash->error(__(('Code invalid, your code = ' . $codigoRecebido . " codigo certo = " . $user['code'])));
+    }
+  }
 
   public function edit($id = null) {
       $this->User->id = $id;

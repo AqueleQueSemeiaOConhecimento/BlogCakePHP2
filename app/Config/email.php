@@ -37,28 +37,34 @@
 class EmailConfig {
 
 	public $default = array(
-		'transport' => 'Mail',
-		'from' => 'you@localhost',
-		//'charset' => 'utf-8',
-		//'headerCharset' => 'utf-8',
+		'transport' => 'Smtp',
+		'from' => array('d3rr3tido@gmail.com' => 'My Site'),
+		'host' => 'smtp.mailtrap.io',
+		'port' => 2525,
+		'timeout' => 30,
+		'username' => 'f2adb07d56dd4f',
+		'password' => '307a870061720d',
+		'client' => null,
+		'log' => false,
 	);
 
 	public $smtp = array(
 		'transport' => 'Smtp',
-		'from' => array('site@localhost' => 'My Site'),
-		'host' => 'localhost',
-		'port' => 25,
+		'from' => array('d3rr3tido@gmail.com' => 'My Site'),
+		'host' => 'sandbox.smtp.mailtrap.io',
+		'port' => 2525,
 		'timeout' => 30,
-		'username' => 'user',
-		'password' => 'secret',
+		'username' => 'f2adb07d56dd4f',
+		'password' => '307a870061720d',
 		'client' => null,
 		'log' => false,
 		//'charset' => 'utf-8',
 		//'headerCharset' => 'utf-8',
 	);
 
+
 	public $fast = array(
-		'from' => 'you@localhost',
+		'from' => array('d3rr3tido@gmail.com' => 'My Site'),
 		'sender' => null,
 		'to' => null,
 		'cc' => null,

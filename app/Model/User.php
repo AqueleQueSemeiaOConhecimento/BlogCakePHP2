@@ -17,6 +17,12 @@ class User extends AppModel {
           'message' => 'A password is required'
         )
         ),
+        'email' => array(
+          'required' => array(
+            'rule' => 'notBlank',
+            'message' => 'A email is required'
+          )
+          ),
         'role' => array(
           'required' => array(
             'rule' => array ('inList', array('admin', 'author')),
@@ -35,4 +41,13 @@ class User extends AppModel {
     }
     return true;
   }
+
+  public $hasMany = [
+    'Post' => [
+      'className' => 'Post',
+      'foreignKey' => 'user_id',
+      'dependent' => true
+    ]
+    ];
+
 }
