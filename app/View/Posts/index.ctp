@@ -1,5 +1,20 @@
 <h1>Blog posts</h1>
 <?= $this->Html->link('Add Post', array('controller' => 'posts', 'action' => 'add')); ?>
+
+<table>
+  <tr>
+  <th>Categories</th>
+  </tr>
+<?php foreach($categories as $category): ?>
+  <tr>
+    <td><?= $this->Html->link($category['Category']['name'], [
+      'controller' => 'posts', 'action' => 'category', $category['Category']['id']
+    ]); ?></td>
+  </tr>
+<?php endforeach ?>
+</table>
+
+
 <table>
   <tr>
     <th>Id</th>
@@ -36,6 +51,8 @@
     </tr>
   <?php endforeach ?>
 </table>
+
+
 
 <?php
 

@@ -1,4 +1,4 @@
-<h1>Posts where category is <?= $conteudo[0]['Category']['name']; ?> </h1>
+<h1>Posts where category is <?= $conteudos[0]['Category']['name']; ?> </h1>
 
 
 <table>
@@ -10,29 +10,34 @@
     <th>Action</th>
     <th>Created</th>
   </tr>
+
+  <?php foreach($conteudos as $conteudo): ?>
+    <tr>
   <td>
-    <?= $conteudo[0]['Post']['id']; ?>
+    <?= $conteudo['Post']['id']; ?>
   </td>
   <td>
-    <?= $conteudo[0]['Post']['title']; ?>
+    <?= $conteudo['Post']['title']; ?>
   </td>
   <td>
-    <?= $conteudo[0]['Category']['name']; ?>
+    <?= $conteudo['Category']['name']; ?>
   </td>
   <td>
-    <?= $conteudo[0]['User']['username']; ?>
+    <?= $conteudo['User']['username']; ?>
   </td>
   <td>
     <?= $this->Form->postLink('Delete', [
-      'controller' => 'posts', 'action' => 'delete', $conteudo[0]['Post']['id']
+      'controller' => 'posts', 'action' => 'delete', $conteudo['Post']['id']
     ], ['confirm' => 'Are you sure?']); ?>
 
     <?= $this->Html->link('Edit', [
-      'controller' => 'posts', 'action' => 'edit', $conteudo[0]['Post']['id']
+      'controller' => 'posts', 'action' => 'edit', $conteudo['Post']['id']
     ]); ?>
   </td>
   <td>
-    <?= $conteudo[0]['Post']['created']; ?>
+    <?= $conteudo['Post']['created']; ?>
   </td>
+  </tr>
+  <?php endforeach ?>
 
 </table>

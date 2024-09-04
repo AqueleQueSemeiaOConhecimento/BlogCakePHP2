@@ -7,6 +7,8 @@ class PostsController extends AppController {
 
   public function index() {
     $this->set('posts', $this->Post->find('all'));
+    $categories = new Category();
+    $this->set('categories', $categories->find('all'));
   }
 
   public function view($id = null) {
@@ -91,7 +93,7 @@ class PostsController extends AppController {
     'conditions' => ['category_id' => $id]
     ]);
 
-    $this->set('conteudo', $conteudo);
+    $this->set('conteudos', $conteudo);
   }
 
 }
