@@ -41,6 +41,13 @@ class PostsController extends AppController {
   }
 
   public function edit($id = null) {
+
+    $categories = $this->Post->Category->find('list', [
+      'fields' => ['Category.id', 'Category.name']
+    ]);
+
+    $this->set('categories', $categories);
+
     if (!$id) {
       throw new NotFoundException(__('Invalid post'));
     }
@@ -72,6 +79,19 @@ class PostsController extends AppController {
     }
 
     return $this->redirect(array('action' => 'index'));
+  }
+
+  public function category($id = null) {
+
+    if(!$id) {
+      $this->Flash->error(__('id nao encontrado'));
+    }
+
+    $conteudo = $this->Post->find('all', [
+    'conditions' => ['category_id' => $id]
+    ]);
+
+    $this->set('conteudo', $conteudo);
   }
 
 }

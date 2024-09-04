@@ -20,8 +20,7 @@
         <?php
           echo $this->Html->link('Edit', array('controller' => 'categories', 'action' => 'edit', $categoria['Category']['id']));
         ?>
-      </td>
-    <td>
+
       <?= $this->Form->postLink('Delete', array('controller' => 'categories', 'action' => 'delete', $categoria['Category']['id']),
     array('confirm' => 'Are you sure?')); ?>
     </td>
