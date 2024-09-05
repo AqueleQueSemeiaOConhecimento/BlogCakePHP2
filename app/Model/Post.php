@@ -7,7 +7,14 @@ class Post extends AppModel {
     ),
     'body' => array(
       'rule' => 'notBlank'
-    )
+    ),
+    'image' => [
+      'rule' => ['file', ['types' => ['image/jpeg', 'image/png', 'image/gif']]],
+      'message' => 'Please, envite a image valite',
+      'allowEmpty' => true,
+      'required' => false,
+      'on' => 'create'
+    ],
     );
 
   public $belongsTo = array(

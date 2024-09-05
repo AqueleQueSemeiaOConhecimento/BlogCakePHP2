@@ -37,6 +37,22 @@ class PostsController extends AppController {
 
     if ($this->request->is('post')) {
       $this->Post->create();
+
+      if(!empty($this->request->data['Post']['image'] && is_array($this->request->data['Post']['image']))) {
+        $imagem = $this->request->data['Post']['image'];
+        $fileName = $this->Auth->user('username') . time() . '-' . $imagem['name'];
+        $filePath = WWW_ROOT . 'img' . DS . 'posts' . DS . $fileName;
+
+        if (move_uploaded_file($imagem['tmp_name'], $filePath)) {
+          $this->request->data['Post']['image'] = $fileName;
+        } else {
+          $error = error_get_last();
+          $this->Flash->error(__('Não foi possivel fazer o envio da imagem ' . $error['message']));
+          return;
+        }
+
+
+      }
       if ($this->Post->save($this->request->data)) {
         return $this->Flash->success(__('Your post has been saved.'));
       }
@@ -55,6 +71,7 @@ class PostsController extends AppController {
     if (!$id) {
       throw new NotFoundException(__('Invalid post'));
     }
+
     $post = $this->Post->findById($id);
     if (!$post) {
       throw new NotFoundException(__('Invalid post'));
@@ -62,6 +79,21 @@ class PostsController extends AppController {
 
     if ($this->request->is(array('post', 'put'))) {
       $this->Post->id = $id;
+
+      if(!empty($this->request->data['Post']['image'] && is_array($this->request->data['Post']['image']))) {
+        $imagem = $this->request->data['Post']['image'];
+        $fileName = $this->Auth->user('username') . time() . '-' . $imagem['name'];
+        $filePath = WWW_ROOT . 'img' . DS . 'posts' . DS . $fileName;
+
+        if (move_uploaded_file($imagem['tmp_name'], $filePath)) {
+          $this->request->data['Post']['image'] = $fileName;
+        } else {
+          $error = error_get_last();
+          $this->Flash->error(__('Não foi possivel fazer o envio da imagem ' . $error['message']));
+          return;
+        }
+      }
+
       if ($this->Post->save($this->request->data)) {
         return $this->Flash->success(__('Your post has been updated'));
       }

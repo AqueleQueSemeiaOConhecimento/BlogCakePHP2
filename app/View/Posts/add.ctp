@@ -1,12 +1,13 @@
 <h1>Add Post</h1>
 <?php
-echo $this->Form->create('Post');
+echo $this->Form->create('Post', ['type' => 'file']);
 echo $this->Form->input('title');
 echo $this->Form->input('category_id', [
   'type' => 'select',
   'label' => 'Category',
   'options' => $categories
 ]);
+echo $this->Form->input('image', ['type' => 'file']);
 echo $this->Form->input('user_id', [
   'type' => 'hidden',
   'value' => $userId
