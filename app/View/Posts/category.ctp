@@ -1,43 +1,49 @@
-<h1>Posts where category is <?= $conteudos[0]['Category']['name']; ?> </h1>
+<?php if (empty($conteudos)): ?>
+<h1>Não foram encontrados posts para esta categoria</h1>
 
+<?php else: ?>
 
-<table>
-  <tr>
-    <th>Id</th>
-    <th>Title</th>
-    <th>Category</th>
-    <th>User Name</th>
-    <th>Action</th>
-    <th>Created</th>
-  </tr>
+  <h1>Posts where category is <?= $conteudos[0]['Category']['name']; ?> </h1>
 
-  <?php foreach($conteudos as $conteudo): ?>
+  <table>
     <tr>
-  <td>
-    <?= $conteudo['Post']['id']; ?>
-  </td>
-  <td>
-    <?= $conteudo['Post']['title']; ?>
-  </td>
-  <td>
-    <?= $conteudo['Category']['name']; ?>
-  </td>
-  <td>
-    <?= $conteudo['User']['username']; ?>
-  </td>
-  <td>
-    <?= $this->Form->postLink('Delete', [
-      'controller' => 'posts', 'action' => 'delete', $conteudo['Post']['id']
-    ], ['confirm' => 'Are you sure?']); ?>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Category</th>
+      <th>User Name</th>
+      <th>Action</th>
+      <th>Created</th>
+    </tr>
 
-    <?= $this->Html->link('Edit', [
-      'controller' => 'posts', 'action' => 'edit', $conteudo['Post']['id']
-    ]); ?>
-  </td>
-  <td>
-    <?= $conteudo['Post']['created']; ?>
-  </td>
-  </tr>
-  <?php endforeach ?>
+    <?php foreach($conteudos as $conteudo): ?>
+      <tr>
+    <td>
+      <?= $conteudo['Post']['id']; ?>
+    </td>
+    <td>
+      <?= $conteudo['Post']['title']; ?>
+    </td>
+    <td>
+      <?= $conteudo['Category']['name']; ?>
+    </td>
+    <td>
+      <?= $conteudo['User']['username']; ?>
+    </td>
+    <td>
+      <?= $this->Form->postLink('Delete', [
+        'controller' => 'posts', 'action' => 'delete', $conteudo['Post']['id']
+      ], ['confirm' => 'Are you sure?']); ?>
 
-</table>
+      <?= $this->Html->link('Edit', [
+        'controller' => 'posts', 'action' => 'edit', $conteudo['Post']['id']
+      ]); ?>
+    </td>
+    <td>
+      <?= $conteudo['Post']['created']; ?>
+    </td>
+    </tr>
+    <?php endforeach ?>
+
+  </table>
+
+<?php endif; ?>
