@@ -25,35 +25,22 @@
     <th>Created</th>
   </tr>
 
-  <?php foreach ($posts as $post): ?>
-    <tr>
-      <td><?= $post['Post']['id']; ?></td>
-      <td>
-        <?= $this->Html->link($post['Post']['title'],
-        array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
-      </td>
-      <td>
-       <?= $post['Category']['name'] ?>
-      </td>
-      <td>
-
-        <?= h($post['User']['username']) ?>
-      </td>
-      <td>
-        <?= $this->Form->postLink('Delete', array('controller' => 'posts', 'action' => 'delete', $post['Post']['id']),
-        array('confirm' => 'Are you sure?')); ?>
-
-        <?php
-          echo $this->Html->link('Edit', array('controller' => 'posts', 'action' => 'edit', $post['Post']['id']));
-        ?>
-      </td>
-      <td><?= $post['Post']['created']; ?></td>
-    </tr>
-  <?php endforeach ?>
-</table>
+<?php foreach($posts as $post): ?>
+  <div class="flex sm:justify-center lg:justify-center sm:mx-auto lg:mx-0 p-2 sm:mb-6 sm:mt-12 lg:mb-4 text-white bg-sky-500/75 hover:bg-sky-500/50 border-2 border-inherit border-solid rounded-md sm:w-48 lg:w-24 cursor-pointer uppercase sm:text-3xl lg:text-sm"><?= $this->Html->link($post['Category']['name'], [
+    'controller' => 'posts', 'action' => 'category', $post['Category']['id']
+  ]); ?></div>
+  <h3 class="flex sm:justify-center lg:justify-normal sm:text-5xl lg:text-3xl text-gray-950 font-bold lg:mb-2 sm:mb-6 " ><?= $post['Post']['title']; ?></h3>
+  <div>
+    <p class="flex sm:justify-center lg:justify-normal sm:text-center sm:text-3xl sm:mb-6 sm:items-center italic lg:text-lg lg:mb-2">
+      <?= $post['Post']['body']; ?>
+    </p>
+  </div>
+  <span class="flex sm:justify-center lg:justify-normal sm:text-2xl lg:text-xs italic"> -
+    <?= $post['Post']['created'] ?>
+  </span>
+<?php endforeach; ?>
 
 
 
-<?php
 
 

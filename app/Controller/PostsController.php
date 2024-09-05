@@ -1,14 +1,16 @@
 <?php
 
 class PostsController extends AppController {
+  public $uses = ['Post', 'Category'];
+
   public $helpers = array('Html', 'Form');
 
   public $components = array('Flash');
 
   public function index() {
     $this->set('posts', $this->Post->find('all'));
-    $categories = new Category();
-    $this->set('categories', $categories->find('all'));
+    $categories = $this->Category->find('all');
+    $this->set('categories', $categories);
   }
 
   public function view($id = null) {

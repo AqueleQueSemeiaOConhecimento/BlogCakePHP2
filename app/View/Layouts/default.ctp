@@ -25,6 +25,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<?php echo $cakeDescription ?>:
 		<?php echo $this->fetch('title'); ?>
 	</title>
+	<script src="https://cdn.tailwindcss.com"></script>
 	<?php
 		echo $this->Html->meta('icon');
 
