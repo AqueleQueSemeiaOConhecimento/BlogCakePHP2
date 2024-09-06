@@ -4,7 +4,7 @@
 class PostsController extends AppController {
   public $uses = ['Post', 'Category'];
 
-  public $helpers = array('Html', 'Form', 'Auth');
+  public $helpers = array('Html', 'Form');
 
   public $components = array('Flash', 'Auth');
 

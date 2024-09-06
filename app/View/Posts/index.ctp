@@ -30,7 +30,7 @@
       <?= $post['Post']['body']; ?>
     </p>
   </div>
-  <?php if($this->Auth->isLoggedIn()): ?>
+  <?php if($logado): ?>
   <div class="flex sm:justify-center lg:justify-normal sm:text-2xl lg:text-sm">
     <?= $this->Html->link('Edit', [
       'controller' => 'posts', 'action' => 'edit', $post['Post']['id']

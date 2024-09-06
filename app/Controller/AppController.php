@@ -56,4 +56,9 @@ class AppController extends Controller {
     $this->Auth->allow('index', 'view');
   }
 
+  public function beforeRender() {
+    $logado = $this->Auth->user() !== null;
+    $this->set('logado', $logado);
+  }
+
 }
