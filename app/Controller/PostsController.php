@@ -1,11 +1,12 @@
 <?php
 
+
 class PostsController extends AppController {
   public $uses = ['Post', 'Category'];
 
-  public $helpers = array('Html', 'Form');
+  public $helpers = array('Html', 'Form', 'Auth');
 
-  public $components = array('Flash');
+  public $components = array('Flash', 'Auth');
 
   public function index() {
     $this->set('posts', $this->Post->find('all'));
@@ -108,6 +109,11 @@ class PostsController extends AppController {
   public function delete($id) {
     if ($this->request->is('get')) {
       throw new MethodNotAllowedException();
+    }
+
+    $post = $this->Post->findById($id);
+    if (!empty($post['Post']['image'])) {
+      unlink(WWW_ROOT . 'img' . DS . 'posts' . DS . $post['Post']['image']);
     }
 
     if ($this->Post->delete($id)) {

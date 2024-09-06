@@ -9,11 +9,8 @@ class Post extends AppModel {
       'rule' => 'notBlank'
     ),
     'image' => [
-      'rule' => ['file', ['types' => ['image/jpeg', 'image/png', 'image/gif']]],
-      'message' => 'Please, envite a image valite',
-      'allowEmpty' => true,
-      'required' => false,
-      'on' => 'create'
+      'rule' => ['extension', ['jpeg', 'git', 'png', 'jpg']],
+      'message' => 'Pleae supply a valid image'
     ],
     );
 

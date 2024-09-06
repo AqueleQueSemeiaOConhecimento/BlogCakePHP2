@@ -30,6 +30,7 @@
       <?= $post['Post']['body']; ?>
     </p>
   </div>
+  <?php if($this->Auth->isLoggedIn()): ?>
   <div class="flex sm:justify-center lg:justify-normal sm:text-2xl lg:text-sm">
     <?= $this->Html->link('Edit', [
       'controller' => 'posts', 'action' => 'edit', $post['Post']['id']
@@ -39,6 +40,7 @@
       'controller' => 'posts', 'action' => 'delete', $post['Post']['id']
     ], ['confirm' => 'Are you sure ?']) ?>
   </div>
+  <?php endif ?>
   <span class="flex sm:justify-center lg:justify-normal sm:text-2xl lg:text-xs italic">
     <?= $post['User']['username'] ?>
     -
